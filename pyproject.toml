@@ -1,0 +1,30 @@
+# Link to explanation of content - https://packaging.python.org/en/latest/tutorials/packaging-projects/
+[build-system]
+requires = ["setuptools>=61.0", "setuptools-git-versioning"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools-git-versioning]
+enabled = true
+
+[project]
+name = "my_custom_package"
+dynamic = ["version"]
+authors = [
+  { name="Author_name", email="youremail@email.com" },
+]
+description = "Reusable code for my"
+readme = "README.md"
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies =[
+    "pyspark==3.2.1",
+
+    "pandasql==0.7.3"
+]
+
+[project.urls]
+"Wiki" = ""
