@@ -1,7 +1,7 @@
 [[_TOC_]]
-# Packaging reusable code- Azure DevOps
+# Packaging code on Azure DevOps
 
-**How do you package reusable code in a private pypi repository**
+**How do you package code in a private pypi repository**
 
 Large projects especially those with high collaborative teams often have code that is reusable across teams. Packaging this code makes the code’s functionality easily available, version-controlled and maintainable. Instead of the different teams reinventing the wheel, they can utilise the standardised implementation of the reusable functionality. 
 
@@ -188,7 +188,7 @@ stages:
               artifactFeed: reusabilityLab/reusabilityLab-packages
 
           - script: |
-              python -m twine upload -r reusabilityLab-packages--config-file $(PYPIRC_PATH) dist/*.whl
+              python -m twine upload -r reusabilityLab-packages --config-file $(PYPIRC_PATH) dist/*.whl
             displayName: "Upload to Azure Artifacts"
 
 ```
