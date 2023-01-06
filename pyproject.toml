@@ -27,4 +27,4 @@ dependencies =[
 ]
 
 [project.urls]
-"Wiki" = ""
+"Wiki" = "https://your-documentation.com"
