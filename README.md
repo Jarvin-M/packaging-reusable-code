@@ -1,4 +1,4 @@
-[[__TOC__]]
+[[_TOC_]]
 # Packaging reusable code- Azure DevOps
 
 **How do you package reusable code in a private pypi repository**
@@ -209,7 +209,7 @@ git push origin --tags
 
 The above will trigger the pipeline and you should have a new version of your package in your artifact feed.
 
-## How to access Package
+## How to access the published package
 Our package is now available in Azure artifacts, we can install it anywhere via pip:
 `pip install my_custom_package --upgrade --extra-index-url <insert-package-reader-token>@pkgs.dev.azure.com/<azure-devops-organisation>/PaceMak<azure-devops-project>/_packaging/<azure-artifacts-feed-name>/pypi/simple/`
 
