@@ -10,7 +10,6 @@ Public package index repositories like PyPI and [conda-forge](https://conda-forg
 ## Prerequisites
 
 1. Azure DevOps Repository - see how to create one
-2
 
 ## Steps
 ### 1. Configure Artifact Feed
@@ -31,10 +30,10 @@ For easy maintainability, we structure our files and folders as below:
 ├── azure-pipelines.yml
 ├── pyproject.toml
 ├── src
-│   ├── package_name
-│   │   └── module_group
+│   ├── package
+│   │   └── sub_package
 │   │       ├── __init__.py 
-│   │       └── module_name.py
+│   │       └── module_1.py
 ```
 
 Each of these files has a crucial purpose in successfully building and publishing your package:
@@ -42,7 +41,7 @@ Each of these files has a crucial purpose in successfully building and publishin
 - `azure-pipelines.yml` - cicd pipeline to incrementally build and deploy our pipeline
 - `pyproject.toml` - configuration file with package building settings
 - `__init__.py` - constructor that initializes a python package object
-- `src/package_name/module_group/module_name.py` - 
+- `src/package/sub_package/module_1.py` - code to be packaged
 
 ### 3. Configure pyproject.toml
 `pyproject.toml` provides a build tool agnostic package configuration that defines the build system requirements and settings utilised by pip to build our package.
@@ -86,67 +85,27 @@ To cater for the incremental versions of your published package, we define the v
 
 More information about `pyproject.toml` can be found [here](https://pip.pypa.io/en/stable/reference/build-system/pyproject-toml/#)
 
-### 4. Add your reusable logic
-In `src/my_custom_package` we can add our logic that is reusable and eligible for packaging. Having quality code is advisable. In our case, a module group called `data_transformation` is defined with an `etl.py` file. 
+### 4. Add your reusable python code
+In `src/my_custom_package` we can add our logic that is reusable and eligible for packaging. Having quality code is advisable. In our case, a sub package called `simple_calculations` is defined with an `algebra.py` module. 
+
 ```python
-from pyspark.sql import DataFrame
-from pyspark.sql.functions import col
+import numpy as np
 
 
-def cast_datatype(df: DataFrame, cast_mapper: dict) -> DataFrame:
-    """cast_datatype casts the data type of column in dataframe to a desired type as defined in
-        cast_mapper
-
-    Parameters
-    ----------
-    df : DataFrame
-        Spark DataFrame for which columns need to be renamed
-    mapper : dict
-        dictionary with
-            {"columname": "desired_DATATYPE"}
-
-    Returns
-    -------
-    DataFrame
-        Output DataFrame with datatype hanges.
-    """
-    columns_list = []
-    for column_name in df.columns:
-        if column_name in cast_mapper.keys():
-            columns_list.append(col(column_name).cast(cast_mapper[column_name]))
-        else:
-            columns_list.append(column_name)
-
-    return df.select(columns_list)
+def addition(a, b):
+    return np.sum([a, b])
 
 
-def join_dataframes(
-    df1: DataFrame,
-    df2: DataFrame,
-    join_columns: list,
-    join_how: str,
-) -> DataFrame:
-    """This function joins 2 Spark Dataframes on provided columns and the join type.
+def subtraction(a, b):
+    return np.subtract([a, b])
 
-    Parameters
-    ----------
-    df1 : DataFrame
-        Base DataFrame to which to join
-    df2 : DataFrame
-        Right side of the join
-    join_columns : list
-        Columns index list on which to join the dataframes.
-    join_how : str
-        type of join to use for joining df1 & df2.
-        "inner", "left", "right", inner, cross, full, semi, anti etc.
 
-    Returns
-    -------
-    DataFrame
-        Joined Spark DataFrame.
-    """
+def division(a, b):
+    return np.divide(a, b)
 
-    return df1.join(other=df2, on=join_columns, how=join_how)
+
+def multiplication(a, b):
+    return np.prod([a * b])
 
 ```
 
@@ -223,5 +182,5 @@ import my_custom_package.data_transformation.etl import cast_datatype, join_data
 ## Resources
 
 1. https://packaging.python.org/en/latest/tutorials/packaging-projects/
-[https://towardsdatascience.com/install-custom-python-libraries-from-private-pypi-on-databricks-6a7669f6e6fd](https://towardsdatascience.com/install-custom-python-libraries-from-private-pypi-on-databricks-6a7669f6e6fd)
+1. [https://towardsdatascience.com/install-custom-python-libraries-from-private-pypi-on-databricks-6a7669f6e6fd](https://towardsdatascience.com/install-custom-python-libraries-from-private-pypi-on-databricks-6a7669f6e6fd)
 1. https://peps.python.org/pep-0621/
