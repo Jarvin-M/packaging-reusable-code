@@ -58,13 +58,20 @@ build-backend = "setuptools.build_meta"
 - `project` specifies the project metadata e.g. name of the package, versioning techniques, authors, python version required, url link to documentation and most importantly dependencies required for your package build
 
 ```toml
+[build-system]
+requires = ["setuptools>=61.0", "setuptools-git-versioning"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools-git-versioning]
+enabled = true
+
 [project]
 name = "my_custom_package"
 dynamic = ["version"]
 authors = [
   { name="Author_name", email="youremail@email.com" },
 ]
-description = "Reusable code for my"
+description = "Reusable code for our project"
 readme = "README.md"
 requires-python = ">=3.7"
 classifiers = [
@@ -73,13 +80,11 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 dependencies =[
-    "pyspark==3.2.1",
-
-    "pandasql==0.7.3"
+    "numpy==1.24.1"
 ]
 
 [project.urls]
-"Wiki" = ""
+"Wiki" = "https://your-documentation.com"
 ```
 To cater for the incremental versions of your published package, we define the versioning to be dynamic and tied to git versioning - to be defined in `azure-pipeline.yaml`. This is defined by `dynamic = ["version"]` in the project metadata and `"setuptools-git-versioning"` in build-system configuration. An appropriate versioning strategy can be adopted - see semantic versioning [here](https://semver.org/)
 

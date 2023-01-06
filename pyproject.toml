@@ -1,4 +1,3 @@
-# Link to explanation of content - https://packaging.python.org/en/latest/tutorials/packaging-projects/
 [build-system]
 requires = ["setuptools>=61.0", "setuptools-git-versioning"]
 build-backend = "setuptools.build_meta"
@@ -12,7 +11,7 @@ dynamic = ["version"]
 authors = [
   { name="Author_name", email="youremail@email.com" },
 ]
-description = "Reusable code for my"
+description = "Reusable code for our project"
 readme = "README.md"
 requires-python = ">=3.7"
 classifiers = [
@@ -21,9 +20,7 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 dependencies =[
-    "pyspark==3.2.1",
-
-    "pandasql==0.7.3"
+    "numpy==1.24.1"
 ]
 
 [project.urls]

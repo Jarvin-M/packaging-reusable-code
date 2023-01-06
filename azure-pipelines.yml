@@ -32,5 +32,5 @@ stages:
               artifactFeed: internal-MLEngineeringCC/reusabilityLab-packages
 
           - script: |
-              python -m twine upload -r reusabilityLab-packages--config-file $(PYPIRC_PATH) dist/*.whl
+              python -m twine upload -r reusabilityLab-packages --config-file $(PYPIRC_PATH) dist/*.whl
             displayName: "Upload to Azure Artifacts"
