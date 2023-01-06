@@ -17,7 +17,7 @@ Azure Artifacts feed enables you to store, manage and control how your packages 
 
 1. Create a new feed in Azure Artifacts -in our case, the name is `reusabilityLab-packages`. Multiple settings exist including setting the visibility and scope of access.  See image below:
 
-    ![](images/artifact-feed.png)
+    ![](images/artifact-feed.jpeg)
 
 For more information about Azure artifact feeds, follow this [link](https://learn.microsoft.com/en-us/azure/devops/artifacts/concepts/feeds?view=azure-devops)
 
@@ -172,6 +172,14 @@ git push origin --tags
 ```
 
 The above will trigger the pipeline and you should have a new version of your package in your artifact feed.
+
+Successful pipeline:
+
+![](images/pipeline.png)
+
+Published package:
+
+![](images/package.png)
 
 ## How to access the published package
 Our package is now available in Azure artifacts, we can install it anywhere via pip:
