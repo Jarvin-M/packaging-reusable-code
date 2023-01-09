@@ -29,7 +29,7 @@ stages:
           - task: TwineAuthenticate@1
             displayName: Twine Authenticate
             inputs:
-              artifactFeed: internal-MLEngineeringCC/reusabilityLab-packages
+              artifactFeed: <feed_name>/<package_name>
 
           - script: |
               python -m twine upload -r reusabilityLab-packages --config-file $(PYPIRC_PATH) dist/*.whl
