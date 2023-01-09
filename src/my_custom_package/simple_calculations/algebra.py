@@ -14,4 +14,4 @@ def division(a, b):
 
 
 def multiplication(a, b):
-    return np.prod([a * b])
+    return np.prod([a, b])
