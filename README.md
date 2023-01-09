@@ -1,4 +1,4 @@
-[[_TOC_]]
+
 # Packaging code on Azure DevOps
 
 **How do you package code in a private pypi repository**
