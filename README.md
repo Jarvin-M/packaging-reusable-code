@@ -3,6 +3,8 @@
 
 **How do you package code in a private pypi repository**
 
+Read Medium Blog: https://medium.com/@jarvinM/packaging-code-on-azure-devops-6f6efb95e0db
+
 Large projects especially those with high collaborative teams often have code that is reusable across teams. Packaging this code makes the code’s functionality easily available, version-controlled and maintainable. Instead of the different teams reinventing the wheel, they can utilise the standardised implementation of the reusable functionality. 
 
 Public package index repositories like PyPI and [conda-forge](https://conda-forge.org/) exist to host the popular packages like pandas, numpy etc but for certain projects, code has to be private. This blog explores how we package and publish reusable code in a private pypi repository.  We shall use Azure DevOps and Python package for this demonstration. *Similar foundational concepts apply to other git hosts and programming languages*
@@ -30,18 +32,20 @@ For easy maintainability, we structure our files and folders as below:
 ├── azure-pipelines.yml
 ├── pyproject.toml
 ├── src
-│   ├── package
-│   │   └── sub_package
+│   ├── package_name
+│   │   └── sub_package_name
 │   │       ├── __init__.py 
-│   │       └── module_1.py
+│   │       └── module_name.py
+├── unit-requirements.txt
 ```
 
 Each of these files has a crucial purpose in successfully building and publishing your package:
 
-- `azure-pipelines.yml` - cicd pipeline to incrementally build and deploy our pipeline
-- `pyproject.toml` - configuration file with package building settings
-- `__init__.py` - constructor that initializes a python package object
-- `src/package/sub_package/module_1.py` - code to be packaged
+- `azure-pipelines.yml` — CI/CD pipeline to incrementally build and deploy our pipeline
+- `pyproject.toml` — configuration file with package building settings
+- `__init__.py` — constructor that initializes a python package object
+- `src/package_name/sub_package_name/module_name.py` — code to be packaged. Assign descriptive and distinct names
+- `unit-requirements.txt` — list of required python package dependencies for the package
 
 ### 3. Configure pyproject.toml
 `pyproject.toml` provides a build tool agnostic package configuration that defines the build system requirements and settings utilised by pip to build our package.
@@ -157,7 +161,7 @@ stages:
 
 ```
 
-- This pipeline is triggerd by a git tag with naming convention - `v.*`. This tag is picked by the build system - `setuptools` defined in `pyproject.toml` and used as the version of the package i.e `package_namev.0.0.1`
+- This pipeline is triggerd by a git tag with naming convention - `v*.*`. This tag is picked by the build system - `setuptools` defined in `pyproject.toml` and used as the version of the package i.e `package_name-0.0.1`
 - [Twine](https://twine.readthedocs.io/en/latest/) is a utility to securely authenticate the package and upload it to our private PyPI repository- Azure Artifacts over HTTPS via a verified connection
 
 
@@ -189,7 +193,12 @@ Our package is now available in Azure artifacts, we can install it anywhere via 
 Then we can import our package as 
 
 ```python
-import my_custom_package.data_transformation.etl import cast_datatype, join_dataframes
+from my_custom_package.simple_calculations.algebra import (
+    addition,
+    division,
+    multiplication,
+    subtraction,
+)
 ```
 
 ## Resources
